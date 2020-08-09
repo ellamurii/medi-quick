@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Prescription extends Model
 {
 
     /**
@@ -13,12 +13,12 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'role',
+        'prescriber_id', 'note',
     ];
 
-    public function prescription()
+    public function prescriber()
     {
-        return $this->hasMany('App\Prescription');
+        return $this->belongsTo('App\User', 'prescriber_id');
     }
 
     /**
