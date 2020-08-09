@@ -19,3 +19,15 @@ $router->get('key', function () use ($router) {
     $length = 32;    
     return substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
 });
+
+$router->group(['prefix' => 'users'], function () use ($router) {
+    $router->get('/',  ['uses' => 'UserController@showAllusers']);
+  
+    $router->get('/{id}', ['uses' => 'UserController@showOneUser']);
+  
+    $router->post('/', ['uses' => 'UserController@create']);
+  
+    $router->delete('/{id}', ['uses' => 'UserController@delete']);
+  
+    $router->put('/{id}', ['uses' => 'UserController@update']);
+  });
