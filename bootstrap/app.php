@@ -20,8 +20,11 @@ date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 */
 
 $app = new Laravel\Lumen\Application(
-    dirname(__DIR__)
+    realpath(__DIR__ . '/../')
 );
+
+$app->instance('path.config', app()->basePath() . DIRECTORY_SEPARATOR . 'config');
+$app->instance('path.storage', app()->basePath() . DIRECTORY_SEPARATOR . 'storage');
 
 $app->withFacades();
 
@@ -91,7 +94,7 @@ $app->configure('app');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 

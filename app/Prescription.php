@@ -3,18 +3,27 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 
 class Prescription extends Model
-{
-
+{   
+    use Uuid;
+    protected $keyType = 'string';
+    public $incrementing = false;
+    protected $guarded = [];
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'prescriber_id', 'note',
+        'prescriber_id', 'patient_id', 'note',
     ];
+
+    public function patient()
+    {
+        return $this->belongsTo('App\User', 'patient_id');
+    }
 
     public function prescriber()
     {
