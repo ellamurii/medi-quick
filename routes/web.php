@@ -43,3 +43,15 @@ $router->group(['prefix' => 'prescriptions'], function () use ($router) {
 
     $router->put('/{id}', ['uses' => 'PrescriptionController@update']);
 });
+
+$router->group(['prefix' => 'products'], function () use ($router) {
+    $router->get('/', ['uses' => 'ProductController@showAll']);
+
+    $router->get('/{id}', ['uses' => 'ProductController@showOne']);
+
+    $router->post('/', ['uses' => 'ProductController@create']);
+
+    $router->delete('/{id}', ['uses' => 'ProductController@delete']);
+
+    $router->put('/{id}', ['uses' => 'ProductController@update']);
+});

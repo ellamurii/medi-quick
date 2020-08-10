@@ -10,16 +10,12 @@ class PrescriptionController extends Controller
 
     public function showAllPrescriptions()
     {
-        $res = Prescription::with('prescriber')->get();
-        $res->makeHidden(['prescriber_id']);
-        return response()->json($res);
+        return response()->json(Prescription::with('prescriber')->get());
     }
 
     public function showOnePrescription($id)
     {
-        $res = Prescription::with('prescriber')->find($id);
-        $res->makeHidden(['prescriber_id']);
-        return response()->json($res);
+        return response()->json(Prescription::with('prescriber')->findOrFail($id));
     }
 
     public function create(Request $request)
