@@ -19,10 +19,21 @@ class PrescriptionController extends Controller
     }
 
     public function create(Request $request)
-    {
-        $prescription = Prescription::create($request->all());
+    {   
+        $prescription = new Prescription($request->all());
+        $prescription->qr = 'none';
+        $prescription->save();
+        $id = $prescription->id;
 
-        return response()->json($prescription, 201);
+        $prescriptionAppendQR = Prescription::findOrFail($id);
+        $prescriptionAppendQR['qr'] = openssl_encrypt($prescription['id'],"AES-128-ECB",$prescription['prescriber_id']);
+        $prescriptionAppendQR->save();
+
+        return response()->json($prescriptionAppendQR, 201);
+    }
+
+    public function decryptPrescription(Request $request) {
+        
     }
 
     public function update($id, Request $request)

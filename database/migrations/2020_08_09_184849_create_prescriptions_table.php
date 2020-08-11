@@ -17,6 +17,7 @@ class CreatePrescriptionsTable extends Migration
             $table->uuid('id')->primary();
             $table->integer('prescriber_id');
             $table->integer('patient_id');
+            $table->string('qr');
             $table->string('note');
             $table->timestamps();
         });
